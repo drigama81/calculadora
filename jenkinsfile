@@ -11,7 +11,7 @@ pipeline
         //string(name: 'DOCKER_PORT', defaultValue: '3000', description: 'Docker port')
     }
 
- stage('Stage docker build')
+    stage('Stage docker build')
         {
             steps {
                 sh "docker rmi -f ${DOCKER_IMAGE_NAME}"
@@ -29,7 +29,7 @@ pipeline
          stage("store artifact on Nexus") {
             steps{
                withCredentials([usernameColonPassword(credentialsId: 'nexus-pw', variable: 'UserPw')]) {
-                 sh 'curl -v -u "$UserPw" --upload-file upload-file /var/lib/jenkins/workspace/java-calculator-nexus/calculator.jar http://nexus:8081/repository/my-raw/'
+                 sh "curl -v -u '$UserPw' --upload-file upload-file /var/lib/jenkins/workspace/java-calculator-nexus/calculator.jar http://nexus:8081/repository/my-raw/"
                 }
         }
     }
@@ -41,6 +41,6 @@ pipeline
                 cleanWs()
             }
         }
-        
     }
+}
 
