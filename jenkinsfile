@@ -6,7 +6,7 @@ pipeline
     parameters
     {
         // Tem que se ir ao Jenkins > Configure > This project is parameterized. 
-        string(name: 'DOCKER_IMAGE_NAME', defaultValue: 'IMAGE_NAME', description: 'Docker image name')
+        string(name: 'DOCKER_IMAGE_NAME', defaultValue: 'image_name', description: 'Docker image name')
         //string(name: 'DOCKER_CONTAINER_NAME', defaultValue: 'container_name', description: 'Docker container name')
         //string(name: 'DOCKER_PORT', defaultValue: '3000', description: 'Docker port')
     }
@@ -16,7 +16,7 @@ pipeline
         stage('Stage docker build')
             {
             steps {
-                //sh "docker rmi -f ${DOCKER_IMAGE_NAME}"
+                sh "docker rmi -f ${DOCKER_IMAGE_NAME}"
                 sh "docker build -t ${DOCKER_IMAGE_NAME} ."
                 withCredentials([usernamePassword(credentialsId: 'nexus-docker', passwordVariable: 'PW', usernameVariable: 'Username')]) {
                 sh "docker login -u '$Username' -p '$PW' localhost:8082"
