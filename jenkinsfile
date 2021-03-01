@@ -25,7 +25,7 @@ pipeline
                 sh "docker tag ${DOCKER_IMAGE_NAME} localhost:8082/${DOCKER_IMAGE_NAME}"
                 sh "docker push localhost:8082/${DOCKER_IMAGE_NAME}"
                 sh "javac *.java"
-                sh "jar cfe calculator.jar TotalCalculator *.class
+                sh "jar cfe calculator.jar TotalCalculator *.class"
             }
         }
 
