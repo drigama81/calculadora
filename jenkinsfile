@@ -11,8 +11,10 @@ pipeline
         //string(name: 'DOCKER_PORT', defaultValue: '3000', description: 'Docker port')
     }
 
-    stage('Stage docker build')
-        {
+    stages
+    {
+        stage('Stage docker build')
+            {
             steps {
                 sh "docker rmi -f ${DOCKER_IMAGE_NAME}"
                 sh "docker build -t ${DOCKER_IMAGE_NAME} ."
@@ -42,4 +44,4 @@ pipeline
             }
         }
     }
-
+}
