@@ -27,6 +27,5 @@ stage('Stage docker build')
                 cleanWs()
             }
         }
-        
     }
 }
