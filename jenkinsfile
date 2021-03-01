@@ -16,7 +16,7 @@ pipeline
         stage('Stage docker build')
             {
             steps {
-                sh "docker rmi -f ${DOCKER_IMAGE_NAME}"
+                //sh "docker rmi -f ${DOCKER_IMAGE_NAME}"
                 sh "docker build -t ${DOCKER_IMAGE_NAME} ."
                 withCredentials([usernamePassword(credentialsId: 'nexus-docker', passwordVariable: 'PW', usernameVariable: 'Username')]) {
                 sh "docker login -u '$Username' -p '$PW' localhost:8082"
