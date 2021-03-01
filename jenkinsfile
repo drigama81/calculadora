@@ -17,7 +17,7 @@ pipeline
  
         stage('Create Docker Image') {
             steps {
-                sh 'docker build -t "$IMAGE_NAME" .'
+                sh 'docker build -t "$Image_name" .'
             }
         }
 
@@ -25,8 +25,8 @@ pipeline
             steps {
                 withCredentials([usernamePassword(credentialsId: 'nexus-docker', passwordVariable: 'PW', usernameVariable: 'Username')]) {
                 sh 'docker login -u "$Username" -p "$PW" localhost:8082'
-                sh 'docker tag "$IMAGE_NAME" localhost:8082/"$IMAGE_NAME"'
-                sh 'docker push localhost:8082/"$IMAGE_NAME"'
+                sh 'docker tag "$Image_name" localhost:8082/"$Image_name"'
+                sh 'docker push localhost:8082/"$Image_name"'
             }
         }
     }
