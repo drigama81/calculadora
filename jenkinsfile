@@ -35,12 +35,12 @@ pipeline
 				}
             }
         }
-        
+
         stage("Push da imagem para o Nexus"){
 			steps{
 				withCredentials([usernamePassword(credentialsId: 'nexus-docker', passwordVariable: 'PW', usernameVariable: 'Username')]) {
-                sh "docker login -u '$Username' -p '$PW' localhost:8082"
-                	sh "docker tag ${DOCKER_IMAGE_NAME}:v1.0 localhost:8082/${DOCKER_IMAGE_NAME}:v1.0"
+                sh "docker login -u '$Username' -p '$PW' localhost:8081"
+                	sh "docker tag ${DOCKER_IMAGE_NAME}:v1.0 localhost:8081/${DOCKER_IMAGE_NAME}:v1.0"
                 	sh "docker push localhost:8082/${DOCKER_IMAGE_NAME}:v1.0"
 				}
 			}
