@@ -22,14 +22,20 @@ pipeline
                 sh "docker rmi -f ${DOCKER_IMAGE_NAME}"
                 sh "docker build -t ${DOCKER_IMAGE_NAME} ."
                 sh "docker login -u admin -p admin localhost:8082"
-                sh "docker tag ${DOCKER_IMAGE_NAME} localhost:8082/${DOCKER_IMAGE_NAME}"
-                sh "docker push localhost:8082/${DOCKER_IMAGE_NAME}"
+                sh "docker tag ${DOCKER_IMAGE_NAME} localhost:8082/${DOCKER_IMAGE_NAME}":v1.0
+                sh "docker push localhost:8082/${DOCKER_IMAGE_NAME}":v1.0
                 sh "javac *.java"
-                sh "jar cfe calculator.jar TotalCalculator *.class"
-                sh "curl -v --user 'admin:admin' --upload-file calculator.jar http://nexus:8081/repository/my-raw/"
+                sh "jar cfe calculator.jar TotalCalculator *.class
             }
         }
-  
+
+         stage("store artifact on Nexus") {
+            steps{
+               withCredentials([usernameColonPassword(credentialsId: 'nexus-pw', variable: 'UserPw')]) {
+                 sh 'curl -v -u "$UserPw" --upload-file /var/jenkins_home/workspace/java-calculator-nexus/calculator.jar http://nexus:8081/repository/my-raw/'
+                }
+        }
+    }
         // Apaga os dados do workspace.
         stage('Stage D - Clean up resources')
         {
