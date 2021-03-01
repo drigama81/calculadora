@@ -14,14 +14,7 @@ pipeline
  
      stages
     {
-        stage ('Stage maven')
-        {
-            steps
-            {
-                sh 'mvn clean package'
-            }
-        }
-  
+ 
         stage('Stage docker build')
         {
             steps
@@ -36,16 +29,7 @@ pipeline
                 sh "curl -v --user 'admin:admin' --upload-file ./target/*.jar http://nexus:8081/repository/my-raw/"
             }
         }
- 
-        stage('Stage docker run')
-        {
-            steps
-            {
-                sh "docker rm -f ${DOCKER_CONTAINER_NAME}"
-                sh "docker run -d -p ${DOCKER_PORT}:8080 --name ${DOCKER_CONTAINER_NAME} ${DOCKER_IMAGE_NAME}"
-            }
-        }
- 
+  
         // Apaga os dados do workspace.
         stage('Stage D - Clean up resources')
         {
