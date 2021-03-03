@@ -4,7 +4,7 @@ pipeline {
 
         string(name: 'IMAGE_NAME', defaultValue:'java-calculator', description:'Name of the Image')
 
-        string(name: 'JAR_NAME', defaultValue:'calculadora', description:'Name of the .jar file')
+        string(name: 'JAR_NAME', defaultValue:'calculator', description:'Name of the .jar file')
 
         //string(name: 'CONTAINER_NAME', defaultValue: 'java-mvn', description:'Docker Container Name')
 
