@@ -38,7 +38,7 @@ pipeline {
                     withSonarQubeEnv ('sonarqube') {
                         sh "${scannerHome}/bin/sonar-scanner \
                         -D sonar.login=6486f3305b19d9bd5d71bbe81fcc21684f78bcac \
-                        -D sonar.jenkins \
+                        -D sonar.projectKey=jenkins \
                         -Dsonar.sources=./ \
                         -D sonar.java.binaries=./ \
                         -D sonar.java.libraries=./*.jar \
