@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool 'SonarQubeScanner';
-                    withSonarQubeEnv ('Sonarqube') {
+                    withSonarQubeEnv ('sonarqube') {
                         sh "${scannerHome}/bin/sonar-scanner \
                         -D sonar.login=6486f3305b19d9bd5d71bbe81fcc21684f78bcac \
                         -D sonar.jenkins \
@@ -44,8 +44,8 @@ pipeline {
                         -D sonar.java.binaries=./ \
                         -D sonar.java.libraries=./*.jar \
                         -D sonar.host.url=http://sonarqube:9000"
-        		}
-        	}
+        		    }
+        	    }   
         	}
         }
 
